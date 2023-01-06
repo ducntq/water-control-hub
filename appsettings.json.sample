@@ -1,0 +1,16 @@
+{
+  "Mqtt": {
+    "Host": "104.194.253.214",
+    "Port": 1883,
+    "Username": "water_pub",
+    "Password": "tr41n1ng"
+  },
+  "MqttTopics": {
+    "Control": "pump/control",
+    "State": "pump/state"
+  },
+  "Telegram": {
+    "Token": "5902265715:AAHY-f8lMPFCJchhE4MclqAueB6pBPdHzN0",
+    "ChatId": "372438141"
+  }
+}
