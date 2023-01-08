@@ -16,19 +16,28 @@ namespace WaterControlHub
                 .Build();
             _settings = config.Get<Settings>();
             if (_settings == null) return 1;
-            var thread = new Thread(StartListenJob);
-            thread.Start();
+            var threadState = new Thread(StartStateJob);
+            var threadCommand = new Thread(StartCommandJob);
+            threadCommand.Start();
+            threadState.Start();
             await TaskCompletionSrc.Task;
 
             Console.WriteLine("Task completed. Exiting...");
             return 0;
         }
 
-        private static void StartListenJob()
+        private static void StartStateJob()
         {
             if (_settings == null) return;
             ListenPumpStateJob jobListen = new ListenPumpStateJob(_settings);
             Task.Run(jobListen.Start);
+        }
+
+        private static void StartCommandJob()
+        {
+            if (_settings == null) return;
+            ListenTelegramCommandJob jobCommand = new ListenTelegramCommandJob(_settings);
+            Task.Run(jobCommand.Start);
         }
     }
 }

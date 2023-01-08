@@ -16,7 +16,7 @@ namespace WaterControlHub.Jobs
         {
             _settings = settings;
             MqttClientOptionsBuilder builder = new MqttClientOptionsBuilder()
-                                        .WithClientId("waterhub")
+                                        .WithClientId("waterhub-state-listener")
                                         .WithTcpServer(_settings.Mqtt.Host, _settings.Mqtt.Port)
                                         .WithCredentials(_settings.Mqtt.Username, _settings.Mqtt.Password);
             _options = new ManagedMqttClientOptionsBuilder()
@@ -24,7 +24,6 @@ namespace WaterControlHub.Jobs
                                     .WithClientOptions(builder.Build())
                                     .Build();
             _telegram = new TelegramBotClient(_settings.Telegram.Token);
-
         }
 
         public async Task Start()
@@ -61,7 +60,7 @@ namespace WaterControlHub.Jobs
 
         private Task onMqttConnected(MqttClientConnectedEventArgs arg)
         {
-            Console.WriteLine("Connected");
+            Console.WriteLine("Connected to MQTT - State Job");
             return Task.CompletedTask;
         }
     }
