@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 .vscode
 appsettings.json
+.DS_STORE

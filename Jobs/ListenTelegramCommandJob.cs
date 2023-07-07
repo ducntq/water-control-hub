@@ -13,7 +13,6 @@ namespace WaterControlHub.Jobs
 {
     public class ListenTelegramCommandJob : IJob
     {
-
         private Settings _settings;
         private static IManagedMqttClient _mqttClient = new MqttFactory().CreateManagedMqttClient();
         private TelegramBotClient _telegram;
